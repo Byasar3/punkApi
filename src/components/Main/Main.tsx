@@ -8,11 +8,11 @@ type MainProps = {
 }
 const Main = ({beers} : MainProps) => {
   return (
-	<div>
-		<BeerCardList beers={beers}/>
-		<> </>
-	</div>
-  )
+    <div className="main">
+      <BeerCardList beers={beers} />
+      <> </>
+    </div>
+  );
 }
 
 export default Main

@@ -9,7 +9,7 @@ type BeerCardListProps = {
 
 const BeerCardList = ({ beers }: BeerCardListProps) => {
   return (
-    <div>
+    <div className="beer-card-list">
       Here is the list of beers
       <BeerCard beers={beers}/>
     </div>
