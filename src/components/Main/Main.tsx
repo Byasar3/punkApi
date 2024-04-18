@@ -1,15 +1,18 @@
-import React from 'react'
+import { useState } from 'react'
 import "./Main.scss"
 import BeerCardList from '../BeerCardList/BeerCardList'
-import Beer from "../../types/Beer"
+import Beer from "../../types/Beer";
 
 type MainProps = {
-	beers : Beer[];
+	filteredBeers : Beer[];
 }
-const Main = ({beers} : MainProps) => {
+
+const Main = ({filteredBeers} : MainProps) => {
+
+
   return (
     <div className="main">
-      <BeerCardList beers={beers} />
+      <BeerCardList beers={filteredBeers} />
       <> </>
     </div>
   );

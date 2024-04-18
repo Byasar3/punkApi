@@ -1,10 +1,29 @@
-import React from 'react'
-import "./SearchBox.scss"
+import { FormEventHandler } from "react";
+import "./SearchBox.scss";
 
-const SearchBox = () => {
+type SearchBoxProps = {
+  placeholder: string;
+  searchTerm: string;
+  handleInput: FormEventHandler<HTMLInputElement>;
+};
+
+const SearchBox = ({
+  placeholder,
+  searchTerm,
+  handleInput,
+}: SearchBoxProps) => {
   return (
-	<div className="search-box">SearchBox</div>
-  )
-}
+    <div className="search-box">
+      <input
+        type="text"
+        id={placeholder}
+        name={placeholder}
+        placeholder={placeholder}
+        value={searchTerm}
+        onInput={handleInput}
+      />
+    </div>
+  );
+};
 
-export default SearchBox
+export default SearchBox;
