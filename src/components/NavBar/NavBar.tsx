@@ -1,11 +1,12 @@
 import React from 'react'
 import "./NavBar.scss"
+import SearchBox from '../SearchBox/SearchBox'
 
 const NavBar = () => {
   return (
-	<div>
+	<div className="nav-bar">
 	NavBar
-	<div>This will be search for name box</div>
+	<SearchBox/>
 	<div>This will be ABV % checkbox</div>
 	<div>This will be classic range checkbox</div>
 	<div>This will be acidity checkbox</div>
