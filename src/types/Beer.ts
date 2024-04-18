@@ -59,3 +59,5 @@ type Volume = {
   value: number;
   unit: string;
 };
+
+export default Beer;

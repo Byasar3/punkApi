@@ -10,7 +10,7 @@ const App = () => {
 
     <div className="app">
      <NavBar/>
-     <Main/>
+     <Main beers={beers}/>
     </div>
   )
 }

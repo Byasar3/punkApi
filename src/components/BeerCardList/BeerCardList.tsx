@@ -1,14 +1,19 @@
 import React from 'react'
 import "./BeerCardList.scss"
 import BeerCard from '../BeerCard/BeerCard'
+import Beer from '../../types/Beer';
 
-const BeerCardList = () => {
+type BeerCardListProps = {
+  beers: Beer[];
+};
+
+const BeerCardList = ({ beers }: BeerCardListProps) => {
   return (
-	<div>
-	Here is the list of beers
-	<BeerCard/>
-	</div>
-  )
-}
+    <div>
+      Here is the list of beers
+      <BeerCard beers={beers}/>
+    </div>
+  );
+};
 
 export default BeerCardList
