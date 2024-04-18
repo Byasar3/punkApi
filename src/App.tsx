@@ -1,9 +1,17 @@
-import React from 'react'
 import "./App.scss"
+import Main from "./components/Main/Main"
+import NavBar from "./components/NavBar/NavBar"
+import beers from "./data/beer"
 
 const App = () => {
+
+
   return (
-    <div>App</div>
+
+    <div className="app">
+     <NavBar/>
+     <Main/>
+    </div>
   )
 }
 
