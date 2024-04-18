@@ -1,9 +1,12 @@
 import React from 'react'
 import "./Main.scss"
+import BeerCardList from '../BeerCardList/BeerCardList'
 
 const Main = () => {
   return (
-	<div>Main</div>
+	<div>
+		<BeerCardList/>
+	</div>
   )
 }
 
