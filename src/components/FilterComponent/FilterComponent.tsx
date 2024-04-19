@@ -2,25 +2,28 @@ import { FormEventHandler } from "react";
 import "./FilterComponent.scss";
 
 type FilterComponentProps = {
+  type: string;
   nameOfWhatItIsFilteringFor: string;
-  searchTerm: string;
+  searchTerm?: string;
   handleInput: FormEventHandler<HTMLInputElement>;
 };
 
 const FilterComponent = ({
+  type,
   nameOfWhatItIsFilteringFor,
   searchTerm,
   handleInput,
 }: FilterComponentProps) => {
   return (
     <div className="search-box">
+      <label htmlFor="">{nameOfWhatItIsFilteringFor}</label>
       <input
-        type="text"
+        type={type}
         id={nameOfWhatItIsFilteringFor}
         name={nameOfWhatItIsFilteringFor}
-        placeholder={nameOfWhatItIsFilteringFor}
         value={searchTerm}
         onInput={handleInput}
+        onChange={handleInput}
       />
     </div>
   );
