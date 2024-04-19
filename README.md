@@ -24,3 +24,18 @@ search the beers bytheir name, and the page content should update asyou type eac
 ## Reference Component Tree
 
 ![Reference Component Tree](src/assets/referenceComponentTree.png)
+
+## Actual webpage
+
+Here is the actual webpage based off the the reference image, before styling is applied.
+The functionality of the search box and filter checkboxes are working
+
+![Screenshot of webpage](src/assets/replicatingRefImg.png)
+
+## Current Component Tree
+
+This is the component tree that corresponds to the current webpage (shown in image above).
+The props of each component is also shown.
+
+![current component tree](src/assets/ComponentTree.png)
+
