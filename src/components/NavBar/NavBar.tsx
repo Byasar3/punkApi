@@ -1,8 +1,7 @@
 import { Dispatch, FormEvent, SetStateAction, useState } from 'react'
 import "./NavBar.scss"
-import SearchBox from '../SearchBox/SearchBox'
-import FilterBox from '../FilterBox/FilterBox'
 import Beer from '../../types/Beer';
+import FilterComponent from '../FilterComponent/FilterComponent';
 
 type NavBarProps = {
   beers: Beer[];
@@ -24,10 +23,12 @@ const NavBar = ({beers, setFilteredBeers} : NavBarProps) => {
   return (
     <div className="nav-bar">
       NavBar
-      <SearchBox placeholder="Search by name..." searchTerm={searchNameTerm} handleInput={handleNameSearch}/>
-      <FilterBox />
-      <FilterBox />
-      <FilterBox />
+      <FilterComponent
+        nameOfWhatItIsFilteringFor="Search by name..."
+        searchTerm={searchNameTerm}
+        handleInput={handleNameSearch}
+      />
+
     </div>
 
     // needs search for name function
