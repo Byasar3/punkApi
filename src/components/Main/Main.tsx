@@ -14,7 +14,7 @@ const Main = ({
   return (
     <div className="main">
       <BeerCardList
-        beers={filteredBeers}
+        filteredBeers={filteredBeers}
       />
       <> </>
     </div>

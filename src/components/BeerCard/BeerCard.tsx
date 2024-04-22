@@ -2,16 +2,12 @@ import "./BeerCard.scss";
 import Beer from "../../types/Beer";
 
 type BeerCardProps = {
-  beers: Beer[];
+  filteredBeers: Beer[];
 };
-const BeerCard = ({
-  beers
-}: BeerCardProps) => {
-
-
+const BeerCard = ({ filteredBeers }: BeerCardProps) => {
   return (
     <div className="beer-card-container">
-      {beers.map((beer) => (
+      {filteredBeers.map((beer) => (
         <div key={beer.id} className="beer-card">
           <img
             src={beer.image_url}
