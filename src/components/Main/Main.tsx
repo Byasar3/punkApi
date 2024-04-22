@@ -9,7 +9,8 @@ type MainProps = {
 
 const Main = ({filteredBeers} : MainProps) => {
 
-
+  console.log(filteredBeers);
+  
   return (
     <div className="main">
       <BeerCardList beers={filteredBeers} />
