@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./App.scss";
 import Main from "./components/Main/Main";
 import NavBar from "./components/NavBar/NavBar";
-// import beers from "./data/beer"
 import Beer from "./types/Beer";
 
 const App = () => {
@@ -15,8 +14,13 @@ const App = () => {
   const [filterClassicRange, setFilterClassicRange] = useState<boolean>(false);
   const [filterHighAcidity, setFilterHighAcidity] = useState<boolean>(false);
 
-  const getBeers = async () => {
-    const url = "http://localhost:3333/v2/beers";
+  const getBeers = async (searchNameTerm : string) => {
+    let url =`http://localhost:3333/v2/beers`;
+
+    if (searchNameTerm) {
+      url += `?beer_name=${searchNameTerm}`;
+    }
+
     const response = await fetch(url);
     const data: Beer[] = await response.json();
     console.log(data);
@@ -32,8 +36,8 @@ const App = () => {
 
   useEffect(() => {
     // run the code we want to run when the page first loads
-    getBeers();
-  }, []);
+    getBeers(searchNameTerm);
+  }, [searchNameTerm]);
 
   const applyFilters = (beers: Beer[]): Beer[] => {
     return beers.filter((beer) => {
@@ -62,8 +66,6 @@ const App = () => {
   return (
     <div className="app">
       <NavBar
-        beers={beers}
-        setFilteredBeers={setFilteredBeers}
         searchNameTerm={searchNameTerm}
         setSearchNameTerm={setSearchNameTerm}
         setFilterAbv={setFilterAbv}
