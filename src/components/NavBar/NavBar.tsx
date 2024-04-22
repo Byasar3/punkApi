@@ -6,14 +6,22 @@ import FilterComponent from "../FilterComponent/FilterComponent";
 type NavBarProps = {
   beers: Beer[];
   setFilteredBeers: Dispatch<SetStateAction<Beer[]>>;
+  searchNameTerm: string;
+  setSearchNameTerm: Dispatch<SetStateAction<string>>;
+  setFilterAbv: Dispatch<SetStateAction<boolean>>;
+  setFilterClassicRange: Dispatch<SetStateAction<boolean>>;
+  setFilterHighAcidity: Dispatch<SetStateAction<boolean>>;
 };
 
-const NavBar = ({ beers, setFilteredBeers }: NavBarProps) => {
-  const [searchNameTerm, setSearchNameTerm] = useState<string>("");
-  const [filterAbv, setFilterAbv] = useState<boolean>(false);
-  const [filterClassicRange, setFilterClassicRange] = useState<boolean>(false);
-  const [filterHighAcidity, setFilterHighAcidity] = useState<boolean>(false);
-
+const NavBar = ({
+  beers,
+  setFilteredBeers,
+  searchNameTerm,
+  setSearchNameTerm,
+  setFilterAbv,
+  setFilterClassicRange,
+  setFilterHighAcidity,
+}: NavBarProps) => {
   const handleNameSearch = (event: FormEvent<HTMLInputElement>) => {
     const cleanedInput = event.currentTarget.value.toLowerCase();
     setSearchNameTerm(cleanedInput);

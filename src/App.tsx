@@ -9,6 +9,12 @@ const App = () => {
   const [beers, setBeers] = useState<Beer[]>([]);
   const [filteredBeers, setFilteredBeers] = useState<Beer[]>([]);
 
+  // search stuff
+  const [searchNameTerm, setSearchNameTerm] = useState<string>("");
+  const [filterAbv, setFilterAbv] = useState<boolean>(false);
+  const [filterClassicRange, setFilterClassicRange] = useState<boolean>(false);
+  const [filterHighAcidity, setFilterHighAcidity] = useState<boolean>(false);
+
   const getBeers = async () => {
     const url = "http://localhost:3333/v2/beers";
     const response = await fetch(url);
@@ -24,7 +30,15 @@ const App = () => {
 
   return (
     <div className="app">
-      <NavBar beers={beers} setFilteredBeers={setFilteredBeers} />
+      <NavBar
+        beers={beers}
+        setFilteredBeers={setFilteredBeers}
+        searchNameTerm={searchNameTerm}
+        setSearchNameTerm={setSearchNameTerm}
+        setFilterAbv={setFilterAbv}
+        setFilterClassicRange={setFilterClassicRange}
+        setFilterHighAcidity={setFilterHighAcidity}
+      />
       <Main filteredBeers={filteredBeers.length ? filteredBeers : beers} />
     </div>
   );

@@ -4,19 +4,31 @@ import BeerCardList from '../BeerCardList/BeerCardList'
 import Beer from "../../types/Beer";
 
 type MainProps = {
-	filteredBeers : Beer[];
-}
+  filteredBeers: Beer[];
+  filterAbv: boolean;
+  filterClassicRange: boolean;
+  filterHighAcidity: boolean;
+};
 
-const Main = ({filteredBeers} : MainProps) => {
-
+const Main = ({
+  filteredBeers,
+  filterAbv,
+  filterClassicRange,
+  filterHighAcidity,
+}: MainProps) => {
   console.log(filteredBeers);
-  
+
   return (
     <div className="main">
-      <BeerCardList beers={filteredBeers} />
+      <BeerCardList
+        beers={filteredBeers}
+        filterAbv={filterAbv}
+        filterClassicRange={filterClassicRange}
+        filterHighAcidity={filterHighAcidity}
+      />
       <> </>
     </div>
   );
-}
+};
 
 export default Main
