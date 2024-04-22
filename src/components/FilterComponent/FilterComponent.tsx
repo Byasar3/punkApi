@@ -3,24 +3,24 @@ import "./FilterComponent.scss";
 
 type FilterComponentProps = {
   type: string;
-  nameOfWhatItIsFilteringFor: string;
+  nameOfFilter: string;
   searchTerm?: string;
   handleInput: FormEventHandler<HTMLInputElement>;
 };
 
 const FilterComponent = ({
   type,
-  nameOfWhatItIsFilteringFor,
+  nameOfFilter,
   searchTerm,
   handleInput,
 }: FilterComponentProps) => {
   return (
     <div className="search-box">
-      <label htmlFor="">{nameOfWhatItIsFilteringFor}</label>
+      <label htmlFor="">{nameOfFilter}</label>
       <input
         type={type}
-        id={nameOfWhatItIsFilteringFor}
-        name={nameOfWhatItIsFilteringFor}
+        id={nameOfFilter}
+        name={nameOfFilter}
         value={searchTerm}
         onInput={handleInput}
         onChange={handleInput}
