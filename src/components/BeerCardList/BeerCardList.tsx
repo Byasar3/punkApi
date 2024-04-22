@@ -3,14 +3,14 @@ import BeerCard from '../BeerCard/BeerCard'
 import Beer from '../../types/Beer';
 
 type BeerCardListProps = {
-  beers: Beer[];
+  filteredBeers: Beer[];
 };
 
-const BeerCardList = ({ beers }: BeerCardListProps) => {
+const BeerCardList = ({ filteredBeers }: BeerCardListProps) => {
   return (
     <div className="beer-card-list">
       Here is the list of beers
-      <BeerCard beers={beers}/>
+      <BeerCard filteredBeers={filteredBeers} />
     </div>
   );
 };
