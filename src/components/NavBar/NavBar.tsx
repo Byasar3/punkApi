@@ -4,8 +4,6 @@ import Beer from "../../types/Beer";
 import FilterComponent from "../FilterComponent/FilterComponent";
 
 type NavBarProps = {
-  beers: Beer[];
-  setFilteredBeers: Dispatch<SetStateAction<Beer[]>>;
   searchNameTerm: string;
   setSearchNameTerm: Dispatch<SetStateAction<string>>;
   setFilterAbv: Dispatch<SetStateAction<boolean>>;
@@ -14,8 +12,6 @@ type NavBarProps = {
 };
 
 const NavBar = ({
-  beers,
-  setFilteredBeers,
   searchNameTerm,
   setSearchNameTerm,
   setFilterAbv,
@@ -26,10 +22,6 @@ const NavBar = ({
   const handleNameSearch = (event: FormEvent<HTMLInputElement>) => {
     const cleanedInput = event.currentTarget.value.toLowerCase();
     setSearchNameTerm(cleanedInput);
-    const filteredBeers = beers.filter((beer) =>
-      beer.name.toLowerCase().includes(cleanedInput)
-    );
-    setFilteredBeers(filteredBeers);
   };
 
   const handleAbvFilter = (event: FormEvent<HTMLInputElement>) => {
