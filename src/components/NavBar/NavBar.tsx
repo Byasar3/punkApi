@@ -1,6 +1,5 @@
-import { Dispatch, FormEvent, SetStateAction } from "react";
+import { FormEvent } from "react";
 import "./NavBar.scss";
-import Beer from "../../types/Beer";
 import FilterComponent from "../FilterComponent/FilterComponent";
 
 type NavBarProps = {
