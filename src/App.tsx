@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import "./App.scss";
 import Main from "./components/Main/Main";
 import NavBar from "./components/NavBar/NavBar";
@@ -19,14 +19,17 @@ const App = () => {
     beerNameSearch: string,
     AbvFilter: boolean,
     classicRangeFilter: boolean,
+
     HighAcidityFilter: boolean,
     pageNumber: number
   ) => {
     let url = `http://localhost:3333/v2/beers?page=${pageNumber}&per_page=40`;
 
+
     // needs to be a prop that changes the page number -> comes from main -> need buttons or pagination component?
     // need a function somewhere that will increment setCurrentPage when buttons are pressed
     // need a usestate for this too, to manage the state
+
 
     // cases where different parameters are entered:
 
@@ -84,6 +87,7 @@ const App = () => {
     return beers.filter((beer) => beer.ph <= 4);
   };
 
+
   const totalPages = 9
   // for now hard coded value as previous function not working:
   // const totalPages = Math.ceil (beers.length/40) as beer.length is set to 40 per page as default
@@ -91,15 +95,35 @@ const App = () => {
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber)
   }
+  const handleNameSearch = (event: FormEvent<HTMLInputElement>) => {
+    const cleanedInput = event.currentTarget.value.toLowerCase();
+    setSearchNameTerm(cleanedInput);
+  };
+
+  const handleAbvFilter = (event: FormEvent<HTMLInputElement>) => {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    setFilterAbv(isChecked);
+  };
+
+  const handleClassicRangeFilter = (event: FormEvent<HTMLInputElement>) => {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    setFilterClassicRange(isChecked);
+  };
+
+  const handleAcidityFilter = (event: FormEvent<HTMLInputElement>) => {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    setFilterHighAcidity(isChecked);
+  };
+
 
   return (
     <div className="app">
       <NavBar
         searchNameTerm={searchNameTerm}
-        setSearchNameTerm={setSearchNameTerm}
-        setFilterAbv={setFilterAbv}
-        setFilterClassicRange={setFilterClassicRange}
-        setFilterHighAcidity={setFilterHighAcidity}
+        handleNameSearch={handleNameSearch}
+        handleAbvFilter={handleAbvFilter}
+        handleClassicRangeFilter={handleClassicRangeFilter}
+        handleAcidityFilter={handleAcidityFilter}
       />
       <Main filteredBeers={beers} />
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
