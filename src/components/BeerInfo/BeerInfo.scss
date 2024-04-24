@@ -1,0 +1,41 @@
+.beer-info {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+	border: 2px solid black;
+
+
+  &__image {
+    height: 400px;
+    width: 150px;
+    padding: 5px;
+  }
+
+  &__mid-section {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	border: 2px dashed black;
+
+  }
+
+  &__mid-section-facts {
+	display: flex;
+	flex-direction: column;
+	border: 2px dotted black;
+  }
+
+  &__ingredients {
+	border: 2px solid black;
+
+  }
+  &__ingredients-list {
+	text-align: left;
+	border: 2px dashed black;
+  }
+
+  &__food-pairings, &__dishes {
+	border: 2px dashed black;
+
+  }
+}
