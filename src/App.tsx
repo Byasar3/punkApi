@@ -3,48 +3,57 @@ import "./App.scss";
 import Main from "./components/Main/Main";
 import NavBar from "./components/NavBar/NavBar";
 import Beer from "./types/Beer";
+import Pagination from "./components/Pagination/Pagination";
 
 const App = () => {
   const [beers, setBeers] = useState<Beer[]>([]);
-  const [filteredBeers, setFilteredBeers] = useState<Beer[]>([]);
 
   // search stuff
   const [searchNameTerm, setSearchNameTerm] = useState<string>("");
   const [filterAbv, setFilterAbv] = useState<boolean>(false);
   const [filterClassicRange, setFilterClassicRange] = useState<boolean>(false);
   const [filterHighAcidity, setFilterHighAcidity] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const getBeers = async (
     beerNameSearch: string,
     AbvFilter: boolean,
     classicRangeFilter: boolean,
-    HighAcidityFilter: boolean
+
+    HighAcidityFilter: boolean,
+    pageNumber: number
   ) => {
-    let url = `http://localhost:3333/v2/beers`;
+    let url = `http://localhost:3333/v2/beers?page=${pageNumber}&per_page=40`;
+
+
+    // needs to be a prop that changes the page number -> comes from main -> need buttons or pagination component?
+    // need a function somewhere that will increment setCurrentPage when buttons are pressed
+    // need a usestate for this too, to manage the state
+
 
     // cases where different parameters are entered:
 
     if (beerNameSearch && !AbvFilter && !classicRangeFilter) {
       // name search
-      url += `?beer_name=${beerNameSearch}`;
+      url += `&beer_name=${beerNameSearch}`;
     } else if (beerNameSearch && AbvFilter && !classicRangeFilter) {
       // name search and ABV filter
-      url += `?beer_name=${beerNameSearch}&abv_gt=6`;
+      url += `&beer_name=${beerNameSearch}&abv_gt=6`;
     } else if (beerNameSearch && AbvFilter && classicRangeFilter) {
       // name search and ABV filter amd classic range filter
-      url += `?beer_name=${beerNameSearch}&abv_gt=6&brewed_before=01-2010`;
+      url += `&beer_name=${beerNameSearch}&abv_gt=6&brewed_before=01-2010`;
     } else if (beerNameSearch && !AbvFilter && classicRangeFilter) {
       // name search and classic range filter
-      url += `?beer_name=${beerNameSearch}&brewed_before=01-2010`;
+      url += `&beer_name=${beerNameSearch}&brewed_before=01-2010`;
     } else if (!beerNameSearch && AbvFilter && classicRangeFilter) {
       // abv filter and classic range filter
-      url += `?abv_gt=6&brewed_before=01-2010`;
+      url += `&abv_gt=6&brewed_before=01-2010`;
     } else if (!beerNameSearch && !AbvFilter && classicRangeFilter) {
       // classic range filter
-      url += `?brewed_before=01-2010`;
+      url += `&brewed_before=01-2010`;
     } else if (!beerNameSearch && AbvFilter && !classicRangeFilter) {
       // abv filter
-      url += `?abv_gt=6`;
+      url += `&abv_gt=6`;
     }
 
     const response = await fetch(url);
@@ -59,13 +68,33 @@ const App = () => {
 
   useEffect(() => {
     // run the code we want to run when the page first loads
-    getBeers(searchNameTerm, filterAbv, filterClassicRange, filterHighAcidity);
-  }, [searchNameTerm, filterAbv, filterClassicRange, filterHighAcidity]);
+    getBeers(
+      searchNameTerm,
+      filterAbv,
+      filterClassicRange,
+      filterHighAcidity,
+      currentPage
+    );
+  }, [
+    searchNameTerm,
+    filterAbv,
+    filterClassicRange,
+    filterHighAcidity,
+    currentPage,
+  ]);
 
   const acidityFilter = (beers: Beer[]): Beer[] => {
     return beers.filter((beer) => beer.ph <= 4);
   };
 
+
+  const totalPages = 9
+  // for now hard coded value as previous function not working:
+  // const totalPages = Math.ceil (beers.length/40) as beer.length is set to 40 per page as default
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber)
+  }
   const handleNameSearch = (event: FormEvent<HTMLInputElement>) => {
     const cleanedInput = event.currentTarget.value.toLowerCase();
     setSearchNameTerm(cleanedInput);
@@ -86,6 +115,7 @@ const App = () => {
     setFilterHighAcidity(isChecked);
   };
 
+
   return (
     <div className="app">
       <NavBar
@@ -95,7 +125,8 @@ const App = () => {
         handleClassicRangeFilter={handleClassicRangeFilter}
         handleAcidityFilter={handleAcidityFilter}
       />
-      <Main filteredBeers={filteredBeers.length ? filteredBeers : beers} />
+      <Main filteredBeers={beers} />
+      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </div>
   );
 };
