@@ -5,40 +5,19 @@ import FilterComponent from "../FilterComponent/FilterComponent";
 
 type NavBarProps = {
   searchNameTerm: string;
-  setSearchNameTerm: Dispatch<SetStateAction<string>>;
-  setFilterAbv: Dispatch<SetStateAction<boolean>>;
-  setFilterClassicRange: Dispatch<SetStateAction<boolean>>;
-  setFilterHighAcidity: Dispatch<SetStateAction<boolean>>;
+  handleNameSearch: (event: FormEvent<HTMLInputElement>) => void;
+  handleAbvFilter: (event: FormEvent<HTMLInputElement>) => void;
+  handleClassicRangeFilter: (event: FormEvent<HTMLInputElement>) => void;
+  handleAcidityFilter: (event: FormEvent<HTMLInputElement>) => void;
 };
 
 const NavBar = ({
   searchNameTerm,
-  setSearchNameTerm,
-  setFilterAbv,
-  setFilterClassicRange,
-  setFilterHighAcidity,
+  handleNameSearch,
+  handleAbvFilter,
+  handleClassicRangeFilter,
+  handleAcidityFilter,
 }: NavBarProps) => {
-
-  const handleNameSearch = (event: FormEvent<HTMLInputElement>) => {
-    const cleanedInput = event.currentTarget.value.toLowerCase();
-    setSearchNameTerm(cleanedInput);
-  };
-
-  const handleAbvFilter = (event: FormEvent<HTMLInputElement>) => {
-    const isChecked = (event.target as HTMLInputElement).checked;
-    setFilterAbv(isChecked);
-  };
-
-  const handleClassicRangeFilter = (event: FormEvent<HTMLInputElement>) => {
-    const isChecked = (event.target as HTMLInputElement).checked;
-    setFilterClassicRange(isChecked);
-  };
-
-  const handleAcidityFilter = (event: FormEvent<HTMLInputElement>) => {
-    const isChecked = (event.target as HTMLInputElement).checked;
-    setFilterHighAcidity(isChecked);
-  };
-
   return (
     <div className="nav-bar">
       NavBar
