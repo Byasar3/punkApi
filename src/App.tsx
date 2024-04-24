@@ -4,6 +4,8 @@ import Main from "./components/Main/Main";
 import NavBar from "./components/NavBar/NavBar";
 import Beer from "./types/Beer";
 import Pagination from "./components/Pagination/Pagination";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import BeerInfo from "./components/BeerInfo/BeerInfo";
 
 const App = () => {
   const [beers, setBeers] = useState<Beer[]>([]);
@@ -110,21 +112,32 @@ const App = () => {
 
   return (
     <div className="app">
-      <NavBar
-        searchNameTerm={searchNameTerm}
-        handleNameSearch={handleNameSearch}
-        handleAbvFilter={handleAbvFilter}
-        handleClassicRangeFilter={handleClassicRangeFilter}
-        handleAcidityFilter={handleAcidityFilter}
-      />
-      <div className="main-body">
-        <Main filteredBeers={beers} />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
+      <BrowserRouter>
+        <NavBar
+          searchNameTerm={searchNameTerm}
+          handleNameSearch={handleNameSearch}
+          handleAbvFilter={handleAbvFilter}
+          handleClassicRangeFilter={handleClassicRangeFilter}
+          handleAcidityFilter={handleAcidityFilter}
         />
-      </div>
+
+        <div className="main-body">
+          <Routes>
+            <Route path="/" element={<Main filteredBeers={beers} />} />
+            <Route
+              path="/"
+              element={
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              }
+            />
+            <Route path="/beer/:beerId" element={<BeerInfo filteredBeers={beers}/>}/>
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 };
