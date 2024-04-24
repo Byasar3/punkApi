@@ -25,12 +25,6 @@ const App = () => {
   ) => {
     let url = `http://localhost:3333/v2/beers?page=${pageNumber}&per_page=40`;
 
-
-    // needs to be a prop that changes the page number -> comes from main -> need buttons or pagination component?
-    // need a function somewhere that will increment setCurrentPage when buttons are pressed
-    // need a usestate for this too, to manage the state
-
-
     // cases where different parameters are entered:
 
     if (beerNameSearch && !AbvFilter && !classicRangeFilter) {
