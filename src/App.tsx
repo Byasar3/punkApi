@@ -14,7 +14,7 @@ const App = () => {
   const [filterClassicRange, setFilterClassicRange] = useState<boolean>(false);
   const [filterHighAcidity, setFilterHighAcidity] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  
+
   const getBeers = async (
     beerNameSearch: string,
     AbvFilter: boolean,
@@ -23,7 +23,7 @@ const App = () => {
     pageNumber: number
   ) => {
     let url = `http://localhost:3333/v2/beers?page=${pageNumber}&per_page=40`;
-    
+
     // needs to be a prop that changes the page number -> comes from main -> need buttons or pagination component?
     // need a function somewhere that will increment setCurrentPage when buttons are pressed
     // need a usestate for this too, to manage the state
@@ -84,6 +84,14 @@ const App = () => {
     return beers.filter((beer) => beer.ph <= 4);
   };
 
+  const totalPages = 9
+  // for now hard coded value as previous function not working:
+  // const totalPages = Math.ceil (beers.length/40) as beer.length is set to 40 per page as default
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber)
+  }
+
   return (
     <div className="app">
       <NavBar
@@ -94,7 +102,7 @@ const App = () => {
         setFilterHighAcidity={setFilterHighAcidity}
       />
       <Main filteredBeers={beers} />
-      <Pagination/>
+      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </div>
   );
 };
