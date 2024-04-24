@@ -1,3 +1,4 @@
+import "./Pagination.scss"
 
 type PaginationProps = {
 	currentPage: number;
@@ -29,13 +30,13 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
 	
 	return (
 		<div className="pagination">
-			<button className="pagination-prev" disabled={currentPage === 1} onClick={handlePreviousClick} > Previous Page </button>
-
+			<button className="pagination__prev" disabled={currentPage === 1} onClick={handlePreviousClick} > Previous Page </button>
+			<div>
 			{paginationNumbers.map((pageNumber) => (
-				<button key={pageNumber} className="pagination-current" onClick={() =>handlePageClick(pageNumber)}>{pageNumber}</button>
+				<button key={pageNumber} className="pagination__current" onClick={() =>handlePageClick(pageNumber)}>{pageNumber}</button>
 			))}
-
-			<button className="pagination-next" disabled={currentPage === totalPages} onClick={handleNextClick}> Next Page </button>
+			</div>
+			<button className="pagination__next" disabled={currentPage === totalPages} onClick={handleNextClick}> Next Page </button>
 		</div>
 	);
 };

@@ -81,14 +81,13 @@ const App = () => {
     return beers.filter((beer) => beer.ph <= 4);
   };
 
-
-  const totalPages = 9
+  const totalPages = 9;
   // for now hard coded value as previous function not working:
   // const totalPages = Math.ceil (beers.length/40) as beer.length is set to 40 per page as default
 
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber)
-  }
+    setCurrentPage(pageNumber);
+  };
   const handleNameSearch = (event: FormEvent<HTMLInputElement>) => {
     const cleanedInput = event.currentTarget.value.toLowerCase();
     setSearchNameTerm(cleanedInput);
@@ -109,7 +108,6 @@ const App = () => {
     setFilterHighAcidity(isChecked);
   };
 
-
   return (
     <div className="app">
       <NavBar
@@ -119,8 +117,14 @@ const App = () => {
         handleClassicRangeFilter={handleClassicRangeFilter}
         handleAcidityFilter={handleAcidityFilter}
       />
-      <Main filteredBeers={beers} />
-      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+      <div className="main-body">
+        <Main filteredBeers={beers} />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 };

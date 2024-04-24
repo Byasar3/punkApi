@@ -1,0 +1,13 @@
+.pagination {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 10px;
+
+
+	&__current {
+		padding-left: 5px;
+		padding-right: 5px;
+		margin: 5px;
+	}
+}
