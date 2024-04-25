@@ -9,19 +9,20 @@ import BeerInfo from "./components/BeerInfo/BeerInfo";
 
 const App = () => {
   const [beers, setBeers] = useState<Beer[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  // const [totalPages, setTotalPages] = useState<number>(0);
 
   // search stuff
   const [searchNameTerm, setSearchNameTerm] = useState<string>("");
   const [filterAbv, setFilterAbv] = useState<boolean>(false);
   const [filterClassicRange, setFilterClassicRange] = useState<boolean>(false);
   const [filterHighAcidity, setFilterHighAcidity] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  
 
   const getBeers = async (
     beerNameSearch: string,
     AbvFilter: boolean,
     classicRangeFilter: boolean,
-
     HighAcidityFilter: boolean,
     pageNumber: number
   ) => {
@@ -51,14 +52,17 @@ const App = () => {
       // abv filter
       url += `&abv_gt=6`;
     }
+ 
+      const response = await fetch(url);
+      const data: Beer[] = await response.json();
 
-    const response = await fetch(url);
-    const data: Beer[] = await response.json();
-    if (HighAcidityFilter) {
-      const filteredHighAcidityBeers = acidityFilter(data);
-      setBeers(filteredHighAcidityBeers);
-    } else {
-      setBeers(data);
+
+      if (HighAcidityFilter) {
+        const filteredHighAcidityBeers = acidityFilter(data);
+        setBeers(filteredHighAcidityBeers);
+      } else {
+        setBeers(data);
+
     }
   };
 
@@ -83,13 +87,15 @@ const App = () => {
     return beers.filter((beer) => beer.ph <= 4);
   };
 
+  
   const totalPages = 9;
   // for now hard coded value as previous function not working:
   // const totalPages = Math.ceil (beers.length/40) as beer.length is set to 40 per page as default
-
+  
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
+  
   const handleNameSearch = (event: FormEvent<HTMLInputElement>) => {
     const cleanedInput = event.currentTarget.value.toLowerCase();
     setSearchNameTerm(cleanedInput);
@@ -99,16 +105,31 @@ const App = () => {
     const isChecked = (event.target as HTMLInputElement).checked;
     setFilterAbv(isChecked);
   };
-
+  
   const handleClassicRangeFilter = (event: FormEvent<HTMLInputElement>) => {
     const isChecked = (event.target as HTMLInputElement).checked;
     setFilterClassicRange(isChecked);
   };
-
+  
   const handleAcidityFilter = (event: FormEvent<HTMLInputElement>) => {
     const isChecked = (event.target as HTMLInputElement).checked;
     setFilterHighAcidity(isChecked);
   };
+  //   useEffect(() => {
+  //     getTotalPages(beers, 1);
+  //   }, [beers]);
+  
+  // const getTotalPages = (beers: Beer[], pageNumber :number) => {
+  //   let allBeers: Beer[] = [];
+  //   allBeers = allBeers.concat(beers)
+  //   let pageIncrement = pageNumber++
+  //   handlePageChange(pageIncrement)
+  //   const itemsPerPage = 40;
+  //   const totalPages = Math.ceil(allBeers.length / itemsPerPage);
+  //   return setTotalPages(totalPages)
+
+  // }
+  // getTotalPages(beers, 1)
 
   return (
     <div className="app">
@@ -120,22 +141,19 @@ const App = () => {
           handleClassicRangeFilter={handleClassicRangeFilter}
           handleAcidityFilter={handleAcidityFilter}
         />
-
         <div className="main-body">
           <Routes>
             <Route path="/" element={<Main filteredBeers={beers} />} />
             <Route
-              path="/"
-              element={
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  onPageChange={handlePageChange}
-                />
-              }
+              path="/beer/:beerId"
+              element={<BeerInfo filteredBeers={beers} />}
             />
-            <Route path="/beer/:beerId" element={<BeerInfo filteredBeers={beers}/>}/>
           </Routes>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       </BrowserRouter>
     </div>
