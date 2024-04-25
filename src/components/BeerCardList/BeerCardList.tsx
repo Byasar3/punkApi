@@ -1,16 +1,12 @@
-import "./BeerCardList.scss"
-import BeerCard from '../BeerCard/BeerCard'
-import Beer from '../../types/Beer';
+import "./BeerCardList.scss";
+import BeerCard from "../BeerCard/BeerCard";
+import Beer from "../../types/Beer";
 
 type BeerCardListProps = {
   filteredBeers: Beer[];
 };
 
-const BeerCardList = ({
-  filteredBeers,
-}: BeerCardListProps) => {
-
-
+const BeerCardList = ({ filteredBeers }: BeerCardListProps) => {
 
   return (
     <div className="beer-card-list">
@@ -20,4 +16,4 @@ const BeerCardList = ({
   );
 };
 
-export default BeerCardList
+export default BeerCardList;

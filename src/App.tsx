@@ -54,26 +54,21 @@ const App = () => {
       // abv filter
       url += `&abv_gt=6`;
     }
-    while (true) {
-      const response = await fetch(url);
-      const data: Beer[] = await response.json();
 
-      if (data.length === 0) {
-        break;
-      }
+    const response = await fetch(url);
+    const data: Beer[] = await response.json();
 
-      allBeers = allBeers.concat(data);
-      pageNumber++;
+    allBeers = allBeers.concat(data);
+    pageNumber++;
 
-      url = `http://localhost:3333/v2/beers?page=${pageNumber}&per_page=${beersPerPage}`;
-      totalCount += data.length;
+    url = `http://localhost:3333/v2/beers?page=${pageNumber}&per_page=${beersPerPage}`;
+    totalCount += data.length;
 
-      if (HighAcidityFilter) {
-        const filteredHighAcidityBeers = acidityFilter(allBeers);
-        setBeers(filteredHighAcidityBeers);
-      } else {
-        setBeers(allBeers);
-      }
+    if (HighAcidityFilter) {
+      const filteredHighAcidityBeers = acidityFilter(allBeers);
+      setBeers(filteredHighAcidityBeers);
+    } else {
+      setBeers(allBeers);
     }
 
     setBeersPerPage(25);
@@ -109,7 +104,6 @@ const App = () => {
   const handleNameSearch = (event: FormEvent<HTMLInputElement>) => {
     const cleanedInput = event.currentTarget.value.toLowerCase();
     setSearchNameTerm(cleanedInput);
-    setCurrentPage(1);
   };
 
   const handleAbvFilter = (event: FormEvent<HTMLInputElement>) => {
@@ -129,6 +123,7 @@ const App = () => {
     setFilterHighAcidity(isChecked);
     setCurrentPage(1);
   };
+  console.log(beers.length);
 
   return (
     <BrowserRouter>
@@ -145,8 +140,7 @@ const App = () => {
                 handleAcidityFilter={handleAcidityFilter}
               />
               <div className="main-body">
-
-                  <Main filteredBeers={beers}  />
+                <Main filteredBeers={beers} />
 
                 <Pagination
                   currentPage={currentPage}
