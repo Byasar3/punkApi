@@ -105,30 +105,28 @@ const App = () => {
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
+    setCurrentPage(1);
   };
 
   const handleNameSearch = (event: FormEvent<HTMLInputElement>) => {
     const cleanedInput = event.currentTarget.value.toLowerCase();
     setSearchNameTerm(cleanedInput);
-    setCurrentPage(1);
+    
   };
 
   const handleAbvFilter = (event: FormEvent<HTMLInputElement>) => {
     const isChecked = (event.target as HTMLInputElement).checked;
     setFilterAbv(isChecked);
-    setCurrentPage(1);
   };
 
   const handleClassicRangeFilter = (event: FormEvent<HTMLInputElement>) => {
     const isChecked = (event.target as HTMLInputElement).checked;
     setFilterClassicRange(isChecked);
-    setCurrentPage(1);
   };
 
   const handleAcidityFilter = (event: FormEvent<HTMLInputElement>) => {
     const isChecked = (event.target as HTMLInputElement).checked;
     setFilterHighAcidity(isChecked);
-    setCurrentPage(1);
   };
 
   return (
