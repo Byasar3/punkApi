@@ -10,14 +10,13 @@ import BeerInfo from "./components/BeerInfo/BeerInfo";
 const App = () => {
   const [beers, setBeers] = useState<Beer[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  // const [totalPages, setTotalPages] = useState<number>(0);
+  const [totalPages, setTotalPages] = useState<number>(0);
 
   // search stuff
   const [searchNameTerm, setSearchNameTerm] = useState<string>("");
   const [filterAbv, setFilterAbv] = useState<boolean>(false);
   const [filterClassicRange, setFilterClassicRange] = useState<boolean>(false);
   const [filterHighAcidity, setFilterHighAcidity] = useState<boolean>(false);
-  
 
   const getBeers = async (
     beerNameSearch: string,
@@ -27,42 +26,58 @@ const App = () => {
     pageNumber: number
   ) => {
     let url = `http://localhost:3333/v2/beers?page=${pageNumber}&per_page=40`;
+    let allBeers: Beer[] = [];
+    let totalCount = 0;
 
     // cases where different parameters are entered:
+    while (true) {
+      if (beerNameSearch && !AbvFilter && !classicRangeFilter) {
+        // name search
+        url += `&beer_name=${beerNameSearch}`;
+      } else if (beerNameSearch && AbvFilter && !classicRangeFilter) {
+        // name search and ABV filter
+        url += `&beer_name=${beerNameSearch}&abv_gt=6`;
+      } else if (beerNameSearch && AbvFilter && classicRangeFilter) {
+        // name search and ABV filter amd classic range filter
+        url += `&beer_name=${beerNameSearch}&abv_gt=6&brewed_before=01-2010`;
+      } else if (beerNameSearch && !AbvFilter && classicRangeFilter) {
+        // name search and classic range filter
+        url += `&beer_name=${beerNameSearch}&brewed_before=01-2010`;
+      } else if (!beerNameSearch && AbvFilter && classicRangeFilter) {
+        // abv filter and classic range filter
+        url += `&abv_gt=6&brewed_before=01-2010`;
+      } else if (!beerNameSearch && !AbvFilter && classicRangeFilter) {
+        // classic range filter
+        url += `&brewed_before=01-2010`;
+      } else if (!beerNameSearch && AbvFilter && !classicRangeFilter) {
+        // abv filter
+        url += `&abv_gt=6`;
+      }
 
-    if (beerNameSearch && !AbvFilter && !classicRangeFilter) {
-      // name search
-      url += `&beer_name=${beerNameSearch}`;
-    } else if (beerNameSearch && AbvFilter && !classicRangeFilter) {
-      // name search and ABV filter
-      url += `&beer_name=${beerNameSearch}&abv_gt=6`;
-    } else if (beerNameSearch && AbvFilter && classicRangeFilter) {
-      // name search and ABV filter amd classic range filter
-      url += `&beer_name=${beerNameSearch}&abv_gt=6&brewed_before=01-2010`;
-    } else if (beerNameSearch && !AbvFilter && classicRangeFilter) {
-      // name search and classic range filter
-      url += `&beer_name=${beerNameSearch}&brewed_before=01-2010`;
-    } else if (!beerNameSearch && AbvFilter && classicRangeFilter) {
-      // abv filter and classic range filter
-      url += `&abv_gt=6&brewed_before=01-2010`;
-    } else if (!beerNameSearch && !AbvFilter && classicRangeFilter) {
-      // classic range filter
-      url += `&brewed_before=01-2010`;
-    } else if (!beerNameSearch && AbvFilter && !classicRangeFilter) {
-      // abv filter
-      url += `&abv_gt=6`;
-    }
- 
       const response = await fetch(url);
       const data: Beer[] = await response.json();
 
+      if (data.length === 0) {
+        break;
+      }
+
+      allBeers = allBeers.concat(data);
+
+      pageNumber++;
+
+      url = `http://localhost:3333/v2/beers?page=${pageNumber}&per_page=40`;
+      totalCount += data.length;
+
+      const itemsPerPage = 40;
+      const totalPages = Math.ceil(totalCount / itemsPerPage);
+      setTotalPages(totalPages);
 
       if (HighAcidityFilter) {
-        const filteredHighAcidityBeers = acidityFilter(data);
+        const filteredHighAcidityBeers = acidityFilter(allBeers);
         setBeers(filteredHighAcidityBeers);
       } else {
-        setBeers(data);
-
+        setBeers(allBeers);
+      }
     }
   };
 
@@ -87,49 +102,34 @@ const App = () => {
     return beers.filter((beer) => beer.ph <= 4);
   };
 
-  
-  const totalPages = 9;
-  // for now hard coded value as previous function not working:
-  // const totalPages = Math.ceil (beers.length/40) as beer.length is set to 40 per page as default
-  
+
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
-  
+
   const handleNameSearch = (event: FormEvent<HTMLInputElement>) => {
     const cleanedInput = event.currentTarget.value.toLowerCase();
     setSearchNameTerm(cleanedInput);
+    setCurrentPage(1);
   };
 
   const handleAbvFilter = (event: FormEvent<HTMLInputElement>) => {
     const isChecked = (event.target as HTMLInputElement).checked;
     setFilterAbv(isChecked);
+    setCurrentPage(1);
   };
-  
+
   const handleClassicRangeFilter = (event: FormEvent<HTMLInputElement>) => {
     const isChecked = (event.target as HTMLInputElement).checked;
     setFilterClassicRange(isChecked);
+    setCurrentPage(1);
   };
-  
+
   const handleAcidityFilter = (event: FormEvent<HTMLInputElement>) => {
     const isChecked = (event.target as HTMLInputElement).checked;
     setFilterHighAcidity(isChecked);
+    setCurrentPage(1);
   };
-  //   useEffect(() => {
-  //     getTotalPages(beers, 1);
-  //   }, [beers]);
-  
-  // const getTotalPages = (beers: Beer[], pageNumber :number) => {
-  //   let allBeers: Beer[] = [];
-  //   allBeers = allBeers.concat(beers)
-  //   let pageIncrement = pageNumber++
-  //   handlePageChange(pageIncrement)
-  //   const itemsPerPage = 40;
-  //   const totalPages = Math.ceil(allBeers.length / itemsPerPage);
-  //   return setTotalPages(totalPages)
-
-  // }
-  // getTotalPages(beers, 1)
 
   return (
     <div className="app">
