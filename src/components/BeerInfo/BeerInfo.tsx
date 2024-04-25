@@ -7,14 +7,7 @@ type BeerInfoProps = {
 };
 const BeerInfo = ({ filteredBeers }: BeerInfoProps) => {
   const { beerId } = useParams();
-
-  console.log(beerId);
-  console.log(filteredBeers);
-
   const beer = filteredBeers.find((beer) => beer.id === Number(beerId));
-
-  console.log(beer);
-
   if (beer === undefined) return <p> Cannot find beer with that id</p>;
 
   return (
