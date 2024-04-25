@@ -12,6 +12,8 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
 		// current page - 1
 		onPageChange(currentPage - 1)
 	}
+	console.log(totalPages);
+	
 
 	const handleNextClick = () => {
 		if (!totalPages) return

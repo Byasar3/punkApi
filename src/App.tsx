@@ -61,8 +61,6 @@ const App = () => {
 
     allBeers = allBeers.concat(data);
     pageNumber++;
-
-    url = `http://localhost:3333/v2/beers?page=${pageNumber}&per_page=${beersPerPage}`;
     totalCount += data.length;
 
     if (HighAcidityFilter) {
@@ -124,7 +122,6 @@ const App = () => {
     setFilterHighAcidity(isChecked);
     setCurrentPage(1);
   };
-  console.log(beers.length);
 
   return (
     <BrowserRouter>
@@ -156,10 +153,10 @@ const App = () => {
           path="/beer/:beerId"
           element={
             <div>
-          <HomeButton />
-          <BeerInfo filteredBeers={beers}/>
-          
-          </div>}
+              <HomeButton />
+              <BeerInfo filteredBeers={beers} />
+            </div>
+          }
         />
       </Routes>
     </BrowserRouter>
