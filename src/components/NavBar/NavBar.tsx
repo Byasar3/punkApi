@@ -20,7 +20,7 @@ const NavBar = ({
   return (
     <div className="nav-bar">
       NavBar
-      <FilterComponent
+      <FilterComponent 
         type="text"
         nameOfFilter="Search by name"
         searchTerm={searchNameTerm}

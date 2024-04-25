@@ -14,12 +14,13 @@ const FilterComponent = ({
   searchTerm,
   handleInput,
 }: FilterComponentProps) => {
+   const inputId = `filter-${nameOfFilter.toLowerCase().replace(/\s+/g, "-")}`;
   return (
     <div className="search-box">
-      <label htmlFor="">{nameOfFilter}</label>
+      <label htmlFor={inputId} >{nameOfFilter}</label>
       <input
         type={type}
-        id={nameOfFilter}
+        id={inputId}
         name={nameOfFilter}
         value={searchTerm}
         onInput={handleInput}

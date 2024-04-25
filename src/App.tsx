@@ -129,7 +129,7 @@ const App = () => {
         <Route
           path="/"
           element={
-            <div className="app">
+            <div className="app" data-testid="navbar">
               <NavBar
                 searchNameTerm={searchNameTerm}
                 handleNameSearch={handleNameSearch}
@@ -137,7 +137,7 @@ const App = () => {
                 handleClassicRangeFilter={handleClassicRangeFilter}
                 handleAcidityFilter={handleAcidityFilter}
               />
-              <div className="main-body">
+              <div className="main-body" data-testid="main-body">
                 <Main filteredBeers={beers} />
 
                 <Pagination
@@ -149,12 +149,12 @@ const App = () => {
             </div>
           }
         />
-        <Route
+        <Route 
           path="/beer/:beerId"
           element={
-            <div>
+            <div >
               <HomeButton />
-              <BeerInfo filteredBeers={beers} />
+              <BeerInfo filteredBeers={beers} data-testid="beer-info-component"/>
             </div>
           }
         />

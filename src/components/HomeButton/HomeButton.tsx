@@ -4,8 +4,12 @@ import "./HomeButton.scss"
 
 const HomeButton = () => {
   return (
-	<div><Link to="/"><button>Go Home</button></Link></div>
-  )
+    <div>
+      <Link to="/">
+        <button>Go Home</button>
+      </Link>
+    </div>
+  );
 }
 
 export default HomeButton
