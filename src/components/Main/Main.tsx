@@ -4,19 +4,16 @@ import Beer from "../../types/Beer";
 
 type MainProps = {
   filteredBeers: Beer[];
+
 };
 
-const Main = ({
-  filteredBeers
-}: MainProps) => {
-  console.log(filteredBeers);
+const Main = ({ filteredBeers }: MainProps) => {
 
   return (
     <div className="main">
       <BeerCardList
         filteredBeers={filteredBeers}
       />
-      <> </>
     </div>
   );
 };

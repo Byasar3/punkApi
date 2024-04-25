@@ -6,7 +6,12 @@ type BeerCardListProps = {
   filteredBeers: Beer[];
 };
 
-const BeerCardList = ({ filteredBeers }: BeerCardListProps) => {
+const BeerCardList = ({
+  filteredBeers,
+}: BeerCardListProps) => {
+
+
+
   return (
     <div className="beer-card-list">
       Here is the list of beers
