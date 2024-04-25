@@ -9,7 +9,10 @@ type MainProps = {
 const Main = ({ filteredBeers }: MainProps) => {
   return (
     <div className="main">
-      <BeerCardList filteredBeers={filteredBeers} />
+      {filteredBeers.length === 0 ? (
+        <p>No beers match the current criteria.</p>
+      ) : ( <BeerCardList filteredBeers={filteredBeers} />)}
+      
     </div>
   );
 };
