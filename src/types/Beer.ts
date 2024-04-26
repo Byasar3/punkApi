@@ -4,19 +4,19 @@ export type Beer = {
   tagline: string;
   first_brewed: string;
   description: string;
-  image_url: string;
-  abv: number;
-  ibu: number;
-  target_fg: number;
-  target_og: number;
-  ebc: number;
-  srm: number;
-  ph: number;
-  attenuation_level: number;
-  volume: Volume;
-  boil_volume: Volume;
-  method: Method;
-  ingredients: Ingredients;
+  image_url: string | null;
+  abv: number | null;
+  ibu: number | null;
+  target_fg: number | null;
+  target_og: number | null;
+  ebc: number | null;
+  srm: number | null;
+  ph: number | null;
+  attenuation_level: number | null;
+  volume: Volume | null;
+  boil_volume: Volume | null;
+  method: Method | null;
+  ingredients: Ingredients | null;
   food_pairing: string[];
   brewers_tips: string;
   contributed_by: string;
@@ -25,7 +25,7 @@ export type Beer = {
 type Ingredients = {
   malt: Malt[];
   hops: Hop[];
-  yeast: string;
+  yeast: string | null;
 };
 
 type Hop = {
@@ -41,8 +41,8 @@ type Malt = {
 };
 
 type Method = {
-  mash_temp: MashTemp[];
-  fermentation: Fermentation;
+  mash_temp: MashTemp[] | null;
+  fermentation: Fermentation | null;
   twist?: any;
 };
 
@@ -51,12 +51,12 @@ type Fermentation = {
 };
 
 type MashTemp = {
-  temp: Volume;
+  temp: Volume | null;
   duration: number | null;
 };
 
 type Volume = {
-  value: number;
+  value: number | null;
   unit: string;
 };
 
