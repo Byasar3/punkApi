@@ -11,8 +11,9 @@ const Main = ({ filteredBeers }: MainProps) => {
     <div className="main">
       {filteredBeers.length === 0 ? (
         <p>No beers match the current criteria.</p>
-      ) : ( <BeerCardList filteredBeers={filteredBeers} />)}
-      
+      ) : (
+        <BeerCardList filteredBeers={filteredBeers} />
+      )}
     </div>
   );
 };

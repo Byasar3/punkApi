@@ -1,5 +1,8 @@
+@use "../../assets/styles/variables" as *;
+
 .beer-card-list {
-	display: flex;
-	flex-wrap: wrap;
-	border: 2px dotted black;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+  width: 100vw;
 }

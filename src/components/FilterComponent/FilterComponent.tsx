@@ -14,10 +14,12 @@ const FilterComponent = ({
   searchTerm,
   handleInput,
 }: FilterComponentProps) => {
-   const inputId = `filter-${nameOfFilter.toLowerCase().replace(/\s+/g, "-")}`;
+  const inputId = `filter-${nameOfFilter.toLowerCase().replace(/\s+/g, "-")}`;
   return (
-    <div className="search-box">
-      <label htmlFor={inputId} >{nameOfFilter}</label>
+    <div className="filter-box">
+      <label htmlFor={inputId} className="filter-box__name">
+        {nameOfFilter}
+      </label>
       <input
         type={type}
         id={inputId}
@@ -25,6 +27,7 @@ const FilterComponent = ({
         value={searchTerm}
         onInput={handleInput}
         onChange={handleInput}
+        className="filter-box__input "
       />
     </div>
   );

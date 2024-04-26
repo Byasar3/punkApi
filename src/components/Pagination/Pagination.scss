@@ -1,13 +1,23 @@
+@use "../../assets/styles/variables" as *;
+
 .pagination {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100vw;
+  padding: 10px;
+  font-size: $medium-font;
 
+  &__current-page-display {
+    padding: 5px;
+  }
 
-	&__current {
-		padding-left: 5px;
-		padding-right: 5px;
-		margin: 5px;
-	}
+  &__prev,
+  &__next {
+    border: 2px solid $quaterny-colour;
+    border-radius: 5px;
+    padding: 5px;
+    background: linear-gradient(to bottom, $primary-colour, $secondary-colour);
+    box-shadow: 0px 5px 5px $quaterny-colour;
+  }
 }

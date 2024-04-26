@@ -130,6 +130,7 @@ const App = () => {
           path="/"
           element={
             <div className="app" data-testid="navbar">
+
               <NavBar
                 searchNameTerm={searchNameTerm}
                 handleNameSearch={handleNameSearch}
@@ -137,6 +138,7 @@ const App = () => {
                 handleClassicRangeFilter={handleClassicRangeFilter}
                 handleAcidityFilter={handleAcidityFilter}
               />
+
               <div className="main-body" data-testid="main-body">
                 <Main filteredBeers={beers} />
 

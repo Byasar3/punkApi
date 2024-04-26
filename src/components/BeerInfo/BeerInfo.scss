@@ -1,9 +1,19 @@
+@use "../../assets/styles/variables" as *;
+
+html {
+  background-color: $bg-colour;
+}
+
 .beer-info {
   display: flex;
   flex-direction: column;
   text-align: center;
-	border: 2px solid black;
-
+  width: 100vw;
+  padding: 25px;
+  font-size: $medium-font;
+  background: linear-gradient(to bottom, $secondary-colour, $tertiary-colour);
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.777);
+  border-radius: 50px;
 
   &__image {
     height: 400px;
@@ -11,31 +21,55 @@
     padding: 5px;
   }
 
-  &__mid-section {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	border: 2px dashed black;
+  &__name {
+    font-size: $large-font;
+  }
 
+  &__mid-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background: linear-gradient(to bottom, $secondary-colour, $tertiary-colour);
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.777);
+    border-radius: 50px;
+    margin: 10px;
   }
 
   &__mid-section-facts {
-	display: flex;
-	flex-direction: column;
-	border: 2px dotted black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__first-brewed,
+  &__abv,
+  &__ibu,
+  &__ph {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: $medium-font;
+  }
+
+  &__description {
+    padding: 20px;
   }
 
   &__ingredients {
-	border: 2px solid black;
-
+    padding: 10px;
+    text-decoration: underline;
   }
+
   &__ingredients-list {
-	text-align: left;
-	border: 2px dashed black;
+    padding: 20px;
+    text-align: left;
   }
 
-  &__food-pairings, &__dishes {
-	border: 2px dashed black;
-
+  &__food-pairings {
+    padding: 20px;
+    text-decoration: underline;
+  }
+  &__dishes {
+    padding: 10px;
   }
 }

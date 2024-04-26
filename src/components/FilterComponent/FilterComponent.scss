@@ -1,6 +1,18 @@
-.search-box {
-	border: 5px dashed gray;
-	border-radius: 5px;
-	padding: 5px;
-	margin: 10px;
+@use "../../assets/styles/variables" as *;
+
+.filter-box {
+  border-radius: 5px;
+  padding: 2px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &__name,
+  &__input {
+    margin: 5px;
+  }
+
+  &__input {
+    background-color: $primary-colour;
+  }
 }
