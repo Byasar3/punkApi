@@ -41,7 +41,6 @@ This is the component tree that corresponds to the current webpage (shown in ima
 The props of each component is also shown.
 
 ![current component tree](src/assets/images/ComponentTree.png)
-![alt text](src/assets/images/componenttree.png)
 
 ## Using the app
 
