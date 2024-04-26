@@ -40,7 +40,8 @@ Clicking on an image of a beer will also take you to their information page:
 This is the component tree that corresponds to the current webpage (shown in image above).
 The props of each component is also shown.
 
-![current component tree](src/assets/images/componenttree.png)
+![current component tree](src/assets/images/ComponentTree.png)
+![alt text](src/assets/images/componenttree.png)
 
 ## Using the app
 
